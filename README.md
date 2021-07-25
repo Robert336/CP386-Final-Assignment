@@ -13,5 +13,7 @@ The final assignment of the CP386 (Operating Systems) course
 # Tests
 # Code Example
 # Authors
+- Robert Mazza
+- Jagveer Sangha
 # Credits
 # License

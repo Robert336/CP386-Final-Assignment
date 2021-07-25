@@ -20,7 +20,7 @@ int n_rows = -1;
 int n_col = -1;
 
 int readFileCustomers(char *fileName);
-void *readFileSequences(char *fileName, int max[n_rows][n_col]);
+void readFileSequences(char *fileName, int max[n_rows][n_col]);
 int safety();
 int sum_arr(int arr[], int n);
 void get_n_col(char *filename);
@@ -56,20 +56,23 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
     }
 
     // *****intialize ALLOCATION*****
-    int *allocation = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
+    //int *allocation = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
+    int allocation[n_rows][n_col];
 
     // *****intialize MAX*****
-    int *max = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
+    int max[n_rows][n_col];
+    //int *max = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
     // MAX array is filled with the data from the textfile
 
     // *****intialize NEED*****
-    int *need = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
+    //int *need = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
+    int need[n_rows][n_col];
 
     safety(); // saftey algo
 
     printf("Number of Customers: %d\n", TotalCustomers);
     printf("Maximum resources from file:\n");
-    void *CustomerSequences = readFileSequences("sample4_in.txt", max);
+    readFileSequences("sample4_in.txt", max);
 
     // Finish bankersalgo
     // printf("Enter Command:");
@@ -110,7 +113,7 @@ int readFileCustomers(char *fileName)
     return count;
 }
 
-void *readFileSequences(char *fileName, int max[n_rows][n_col])
+void readFileSequences(char *fileName, int max[n_rows][n_col])
 {
     FILE *in = fopen("sample4_in.txt", "r");
 
@@ -118,7 +121,7 @@ void *readFileSequences(char *fileName, int max[n_rows][n_col])
     {
         printf(
             "Error in opening input file...exiting with error code -1\n");
-        return NULL;
+        exit(-1);
     }
 
     char *token;
@@ -145,7 +148,6 @@ void *readFileSequences(char *fileName, int max[n_rows][n_col])
     }
     printf("\n");
     fclose(in);
-    return NULL;
 }
 
 // impliments requestResource(), releaseResource(), and saftey() functions

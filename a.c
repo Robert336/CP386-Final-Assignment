@@ -16,10 +16,14 @@ int *max;        // m x n matrix representing max number of instances of each re
 int *allocation; // m x n matrix representing the num of resources of each type currently allocated to each process
 int *need;       // m x n matrix representing the remaining resource needs of each process. Need[i][j] = max[i][j] - allocation[i][j]
 
+int n_rows = -1;
+int n_col = -1;
+
 int readFileCustomers(char *fileName);
 void *readFileSequences(char *fileName);
 int safety();
 int sum_arr(int arr[], int n);
+void get_n_col(char *filename);
 
 typedef struct thread //represents a single thread, you can add more members if required
 {
@@ -38,11 +42,21 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
         return -1;
     }
 
+    int TotalCustomers = readFileCustomers("sample4_in.txt");
+
+    n_rows = TotalCustomers; // number of rows = amount of customers
+    get_n_col("sample4_in.txt");
+
     // *****intialize data structures *****
+    available = (int *)malloc(n_col * sizeof(int));
+    for (int i = 0; i < n_col; i++)
+    {
+        //printf("argv == %d\n", atoi(argv[i + 1]));
+        available[i] = atoi(argv[i + 1]);
+    }
 
     safety();
 
-    int TotalCustomers = readFileCustomers("sample4_in.txt");
     printf("Number of Customers: %d\n", TotalCustomers);
     printf("Maximum resources from file:\n");
     void *CustomerSequences = readFileSequences("sample4_in.txt");
@@ -96,12 +110,19 @@ void *readFileSequences(char *fileName)
             "Error in opening input file...exiting with error code -1\n");
         return NULL;
     }
+
+    char *token;
     while (!feof(in))
     {
         char line[100];
         if (fgets(line, 100, in) != NULL)
         {
             printf("%s", line);
+            token = strtok(line, ",");
+            while (token != NULL)
+            {
+                token = strtok(NULL, ",");
+            }
         }
     }
     printf("\n");
@@ -171,6 +192,36 @@ int sum_arr(int arr[], int n)
         }
         return sum;
     }
+}
+
+void get_n_col(char *filename)
+{
+    FILE *in = fopen("sample4_in.txt", "r");
+
+    if (!in)
+    {
+        printf(
+            "Error in opening input file...exiting with error code -1\n");
+        exit(-1);
+    }
+
+    char *token;
+    if (!feof(in))
+    {
+        char line[100];
+        if (fgets(line, 100, in) != NULL)
+        {
+            token = strtok(line, ",");
+            n_col = 0;
+            while (token != NULL)
+            {
+                n_col += 1;
+                token = strtok(NULL, ",");
+            }
+        }
+    }
+    fclose(in);
+    //printf("%d COLUMNS\n", n_col);
 }
 
 //***************************************************************

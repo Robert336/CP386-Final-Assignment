@@ -1,5 +1,3 @@
-#include "a.h"
-
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +8,19 @@
 #include <semaphore.h>
 #include <stdbool.h>
 
+// DATA STRUCTURES NEEDED FOR BANKERS ALGO
+// *** All data structures currently hard-coded size to match input file for testing ***
+
+int *available;  // represents the number of available resources of each type
+int *max;        // m x n matrix representing max number of instances of each resource that a process can request
+int *allocation; // m x n matrix representing the num of resources of each type currently allocated to each process
+int *need;       // m x n matrix representing the remaining resource needs of each process. Need[i][j] = max[i][j] - allocation[i][j]
+
+int readFileCustomers(char *fileName);
+void *readFileSequences(char *fileName);
+int safety();
+int sum_arr(int arr[], int n);
+
 typedef struct thread //represents a single thread, you can add more members if required
 {
     char tid[4]; //id of the thread as read from file
@@ -19,8 +30,13 @@ typedef struct thread //represents a single thread, you can add more members if 
     int retVal;
 } Thread;
 
-int main() // modify to take commandline arguments
+int main(int argc, char *argv[]) // modify to take commandline arguments
 {
+    if (argc < 3)
+    {
+        printf("missing command line arguments.... exiting");
+        return -1;
+    }
 
     // *****intialize data structures *****
 
@@ -129,19 +145,19 @@ int safety() // REMEMBER TO DEFINE ABOVE
     //printf("test sizeof finish = %d\n", (int)(sizeof(finish) / sizeof(finish[0])));
     //printf("test sizeof available = %d\n", (int)(sizeof(available) / sizeof(available[0])));
 
-    for (int i = 0; i < (sizeof(finish) / sizeof(finish[0])); i++)
-    {
-        int need_n = (int)(sizeof(need[i]) / sizeof(need[i][0]));
-        int available_n = (int)(sizeof(available) / sizeof(available[0]));
+    // for (int i = 0; i < (sizeof(finish) / sizeof(finish[0])); i++)
+    // {
+    //     int need_n = (int)(sizeof(need[i]) / sizeof(need[i][0]));
+    //     int available_n = (int)(sizeof(available) / sizeof(available[0]));
 
-        printf("test >>> need_n = %d :: available_n = %d", need_n, available_n);
+    //     printf("test >>> need_n = %d :: available_n = %d", need_n, available_n);
 
-        int need_sum = sum_arr(*need[i], need_n);
-        int available_sum = sum_arr(*available, available_n);
-        if (finish[i] == false && need_sum <= available_sum)
-        {
-        }
-    }
+    //     int need_sum = sum_arr(*need[i], need_n);
+    //     int available_sum = sum_arr(*available, available_n);
+    //     if (finish[i] == false && need_sum <= available_sum)
+    //     {
+    //     }
+    // }
 }
 
 int sum_arr(int arr[], int n)

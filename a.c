@@ -11,10 +11,10 @@
 // DATA STRUCTURES NEEDED FOR BANKERS ALGO
 // *** All data structures currently hard-coded size to match input file for testing ***
 
-int *available;  // represents the number of available resources of each type
-int *max;        // m x n matrix representing max number of instances of each resource that a process can request
-int *allocation; // m x n matrix representing the num of resources of each type currently allocated to each process
-int *need;       // m x n matrix representing the remaining resource needs of each process. Need[i][j] = max[i][j] - allocation[i][j]
+// int *available;  // represents the number of available resources of each type
+// int *max;        // m x n matrix representing max number of instances of each resource that a process can request
+// int *allocation; // m x n matrix representing the num of resources of each type currently allocated to each process
+// int *need;       // m x n matrix representing the remaining resource needs of each process. Need[i][j] = max[i][j] - allocation[i][j]
 
 int n_rows = -1;
 int n_col = -1;
@@ -36,26 +36,36 @@ typedef struct thread //represents a single thread, you can add more members if 
 
 int main(int argc, char *argv[]) // modify to take commandline arguments
 {
-    if (argc < 3)
+    get_n_col("sample4_in.txt"); // find how many different resources the bank will have (columns in the matrix)
+
+    if (argc <= n_col) // check if the user gave the right amount of arguments
     {
         printf("missing command line arguments.... exiting");
         return -1;
     }
 
     int TotalCustomers = readFileCustomers("sample4_in.txt");
-
     n_rows = TotalCustomers; // number of rows = amount of customers
-    get_n_col("sample4_in.txt");
 
-    // *****intialize data structures *****
-    available = (int *)malloc(n_col * sizeof(int));
+    // *****intialize AVAILABLE*****
+    int *available = (int *)malloc(n_col * sizeof(int)); // takes arguments from the command line when the program is started
     for (int i = 0; i < n_col; i++)
     {
         //printf("argv == %d\n", atoi(argv[i + 1]));
-        available[i] = atoi(argv[i + 1]);
+        available[i] = atoi(argv[i + 1]); // populating the available array with the values passed thru the command line
     }
 
-    safety();
+    // *****intialize ALLOCATION*****
+    int *allocation = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
+
+    // *****intialize MAX*****
+    int *max = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
+    // MAX array is filled with the data from the textfile
+
+    // *****intialize NEED*****
+    int *need = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
+
+    safety(); // saftey algo
 
     printf("Number of Customers: %d\n", TotalCustomers);
     printf("Maximum resources from file:\n");
@@ -112,6 +122,8 @@ void *readFileSequences(char *fileName)
     }
 
     char *token;
+
+    int i = 0;
     while (!feof(in))
     {
         char line[100];
@@ -119,11 +131,17 @@ void *readFileSequences(char *fileName)
         {
             printf("%s", line);
             token = strtok(line, ",");
+            int j = 0;
             while (token != NULL)
             {
+                //printf("\n");
+                //printf(" %d ", atoi(token));
+                max[i][j] = atoi(token);
                 token = strtok(NULL, ",");
+                j += 1;
             }
         }
+        i += 1;
     }
     printf("\n");
     fclose(in);

@@ -20,7 +20,7 @@ int n_rows = -1;
 int n_col = -1;
 
 int readFileCustomers(char *fileName);
-void *readFileSequences(char *fileName);
+void *readFileSequences(char *fileName, int max[n_rows][n_col]);
 int safety();
 int sum_arr(int arr[], int n);
 void get_n_col(char *filename);
@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
 
     printf("Number of Customers: %d\n", TotalCustomers);
     printf("Maximum resources from file:\n");
-    void *CustomerSequences = readFileSequences("sample4_in.txt");
+    void *CustomerSequences = readFileSequences("sample4_in.txt", max);
 
     // Finish bankersalgo
     // printf("Enter Command:");
@@ -110,7 +110,7 @@ int readFileCustomers(char *fileName)
     return count;
 }
 
-void *readFileSequences(char *fileName)
+void *readFileSequences(char *fileName, int max[n_rows][n_col])
 {
     FILE *in = fopen("sample4_in.txt", "r");
 

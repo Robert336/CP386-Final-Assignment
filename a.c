@@ -21,7 +21,7 @@ int n_col = -1;
 
 int readFileCustomers(char *fileName);
 void readFileSequences(char *fileName, int max[n_rows][n_col]);
-int safety();
+int safety(int safety_array[], int n);
 int sum_arr(int arr[], int n);
 void get_n_col(char *filename);
 
@@ -36,15 +36,22 @@ typedef struct thread //represents a single thread, you can add more members if 
 
 int main(int argc, char *argv[]) // modify to take commandline arguments
 {
+
     get_n_col("sample4_in.txt"); // find how many different resources the bank will have (columns in the matrix)
 
     if (argc <= n_col) // check if the user gave the right amount of arguments
     {
-        printf("missing command line arguments.... exiting");
+        printf("missing command line arguments.... exiting\n");
         return -1;
     }
 
+    /**
+     * Calculates the number of total customer sequences given with the sample 
+     * txt file and displays it to the user
+     */
     int TotalCustomers = readFileCustomers("sample4_in.txt");
+    printf("Number of Customers: %d\n", TotalCustomers);
+
     n_rows = TotalCustomers; // number of rows = amount of customers
 
     // *****intialize AVAILABLE*****
@@ -68,14 +75,17 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
     //int *need = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
     int need[n_rows][n_col];
 
-    safety(); // saftey algo
+    // safety(); // saftey algo
 
-    printf("Number of Customers: %d\n", TotalCustomers);
     printf("Maximum resources from file:\n");
     readFileSequences("sample4_in.txt", max);
 
     // Finish bankersalgo
+
     // printf("Enter Command:");
+    // //Ask user to enter a command followed by sequence
+    // char command = scanf("%s", &command);
+    // bankersalgo(command); //Takes and executes command
 
     return 0;
 }
@@ -101,7 +111,6 @@ int readFileCustomers(char *fileName)
 
     while (!feof(in))
     {
-
         count += 1;
         char line[100];
         if (fgets(line, 100, in) != NULL)
@@ -171,8 +180,13 @@ int release_resource() // REMEMBER TO DEFINE ABOVE
 
 // Saftey algo mentioned in chapter 8
 // Use: find whether or not a system is in a safe state.
-int safety() // REMEMBER TO DEFINE ABOVE
+int safety(int safety_array[], int n) // REMEMBER TO DEFINE ABOVE
 {
+    /**Checks the array to
+     * */
+    for (int i = 0; i < n - 1; i++)
+        printf("%d", safety_array[i]);
+    printf("%d", safety_array[n - 1]);
     //int work[] = available;
 
     // **HARD CODEED**

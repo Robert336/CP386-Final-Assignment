@@ -25,6 +25,7 @@ int safety(int safety_array[], int n);
 int sum_arr(int arr[], int n);
 void get_n_col(char *filename);
 int bankersalgo();
+void run_cmd();
 
 typedef struct thread //represents a single thread, you can add more members if required
 {
@@ -87,7 +88,7 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
     // //Ask user to enter a command followed by sequence
     // char command = scanf("%s", &command);
     // bankersalgo(command); //Takes and executes command
-
+    run_cmd();
     return 0;
 }
 
@@ -257,6 +258,47 @@ void get_n_col(char *filename)
     }
     fclose(in);
     //printf("%d COLUMNS\n", n_col);
+}
+
+void run_cmd()
+{
+    bool ongoing = true;
+    while (ongoing)
+    {
+        printf("Enter Command: ");
+        char command = scanf("%s", &command); //With this it becomes difficult to check what command
+        /**
+         * The scanf and if statements don't work properly need to fix
+         * Find a way to split the string
+         * */
+        if (true)
+        {
+            /**
+             * Include content for if the user requests resources
+             * */
+        }
+        else if (true)
+        {
+            /**
+             * Include content for if the user wants to release resources
+             * */
+        }
+        else if (strcmp(command, "Status") == 0)
+        {
+            //Execute the status command
+        }
+        else if (strcmp(command, "Run") == 0)
+        {
+            //execute the run command
+        }
+        else if (strcmp(command, "Quit") == 0) //I think null means to stop from the example code unless we can make our own keyword
+        {
+            ongoing = false;
+            printf("Exit\n");
+        }
+        else
+            printf("Invalid Command. Retry and type the following {RQ, RL, Run, Status}\n");
+    }
 }
 
 //***************************************************************

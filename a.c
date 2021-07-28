@@ -24,6 +24,7 @@ void readFileSequences(char *fileName, int max[n_rows][n_col]);
 int safety(int safety_array[], int n);
 int sum_arr(int arr[], int n);
 void get_n_col(char *filename);
+int bankersalgo();
 
 typedef struct thread //represents a single thread, you can add more members if required
 {

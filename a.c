@@ -26,6 +26,8 @@ int sum_arr(int arr[], int n);
 void get_n_col(char *filename);
 int bankersalgo();
 void run_cmd();
+int request_resource(int resource[]);
+int release_resource(int resource[]);
 
 typedef struct thread //represents a single thread, you can add more members if required
 {
@@ -191,15 +193,29 @@ int bankersalgo() // REMEMBER TO DEFINE ABOVE
 // function to request a resource
 // Return: 0 = Sucess
 // Return: -1 = Failed
-int request_resource() // REMEMBER TO DEFINE ABOVE
+int request_resource(int resource[]) // REMEMBER TO DEFINE ABOVE
 {
+    //Testing
+    for (int i = 0; i < n_col + 1; i++)
+    {
+        printf("%d ", resource[i]);
+        printf("\n");
+    }
+    return 0;
 }
 
 // function to release a resource
 // Return: 0 = Sucess
 // Return: -1 = Failed
-int release_resource() // REMEMBER TO DEFINE ABOVE
+int release_resource(int resource[]) // REMEMBER TO DEFINE ABOVE
 {
+    //Testing
+    for (int i = 0; i < n_col + 1; i++)
+    {
+        printf("%d ", resource[i]);
+        printf("\n");
+    }
+    return 0;
 }
 
 // Saftey algo mentioned in chapter 8
@@ -316,10 +332,10 @@ void run_cmd()
         int j = 0;
         while (token != NULL)
         {
-            //printf("\n");
-            //printf(" %d ", atoi(token));
+            // printf("\n");
+            // printf(" %d ", atoi(token));
             args[j] = atoi(token);
-            //printf("%d ", args[j]);
+            // printf("%d ", args[j]);
             token = strtok(NULL, " ");
             j += 1;
         }
@@ -355,6 +371,8 @@ void run_cmd()
              * Include content for if the user requests resources
              * */
             printf("work rq\n");
+
+            request_resource(args);
         }
         else if (strstr(command, "rl") != NULL)
         {
@@ -363,6 +381,7 @@ void run_cmd()
              * Include content for if the user wants to release resources
              * */
             printf("work rl\n");
+            release_resource(args);
         }
         else if (strstr(command, "status") != NULL)
         {

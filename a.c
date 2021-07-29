@@ -279,7 +279,30 @@ void run_cmd()
         // scanf("%29s", command); //With this it becomes difficult to check what command
 
         fgets(command, 100, stdin);
+
         char *onlyCommand = strtok(command, " "); //removes all white spaces and retrieves only the command
+        //printf("COMMAND >>> %s\n", onlyCommand);
+
+        int args[n_col + 1];
+        char *token;
+        token = strtok(NULL, " ");
+        int j = 0;
+        while (token != NULL)
+        {
+            //printf("\n");
+            //printf(" %d ", atoi(token));
+            args[j] = atoi(token);
+            //printf("%d ", args[j]);
+            token = strtok(NULL, " ");
+            j += 1;
+        }
+
+        // TESTING args[]
+        // printf("\n");
+        // for (int i = 0; i < n_col + 1; i++)
+        // {
+        //     printf("%d ", args[i]);
+        // }
 
         // strcpy(line, ptr);
 

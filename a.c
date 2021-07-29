@@ -7,7 +7,7 @@
 #include <time.h>
 #include <semaphore.h>
 #include <stdbool.h>
-#include <ctype.h>
+#include <ctype.h> //For run_cmd
 // DATA STRUCTURES NEEDED FOR BANKERS ALGO
 // *** All data structures currently hard-coded size to match input file for testing ***
 
@@ -269,13 +269,12 @@ void run_cmd()
     /**
  * The next ints are the values that come after the user enters the command
  * */
-    // int array_row;      //after a command user enters the row of the array
-    // int r1, r2, r3, r4; //Customer sequence
+
     while (ongoing)
     {
         printf("Enter Command: ");
+
         // %29s makes it so theres no buffer overload
-        //%d %d %d %d %d &array_row, &r1, &r2, &r3, &r4
         // scanf("%29s", command); //With this it becomes difficult to check what command
 
         fgets(command, 100, stdin);

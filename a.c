@@ -41,10 +41,32 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
 
     get_n_col("sample4_in.txt"); // find how many different resources the bank will have (columns in the matrix)
 
-    if (argc <= n_col) // check if the user gave the right amount of arguments
+    /**
+ * Error checking to ensure user gives the right amount of avaiable resources
+ * Also checks if the given resource is a number or a letter
+ * */
+    if (argc < 5) // check if the user gave the right amount of arguments (4 available resources)
     {
         printf("missing command line arguments.... exiting\n");
         return -1;
+    }
+    else if (argc > 5) //Error checking to ensure user only enters 4 arguments for current resources
+    {
+        printf("Too many command line arguments....exiting\n");
+        return -1;
+    }
+    else
+    { //Checks to ensure the given available resources is a number and not a letter
+
+        for (int i = 1; i < argc; i++)
+        {
+            // printf("%d\n", isalpha(*argv[i]));
+            if (isalpha(*argv[i]) != 0)
+            {
+                printf("Enter a number for available resources not a letter....exiting\n");
+                return -1;
+            }
+        }
     }
 
     /**
@@ -53,8 +75,8 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
      */
     int TotalCustomers = readFileCustomers("sample4_in.txt");
     printf("Number of Customers: %d\n", TotalCustomers);
-
-    n_rows = TotalCustomers; // number of rows = amount of customers
+    printf("Currently Available resources: %s %s %s %s\n", argv[1], argv[2], argv[3], argv[4]); // Prints out the current list of available resources
+    n_rows = TotalCustomers;                                                                    // number of rows = amount of customers
 
     // *****intialize AVAILABLE*****
     int *available = (int *)malloc(n_col * sizeof(int)); // takes arguments from the command line when the program is started

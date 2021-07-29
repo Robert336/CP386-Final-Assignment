@@ -7,7 +7,7 @@
 #include <time.h>
 #include <semaphore.h>
 #include <stdbool.h>
-
+#include <ctype.h>
 // DATA STRUCTURES NEEDED FOR BANKERS ALGO
 // *** All data structures currently hard-coded size to match input file for testing ***
 
@@ -262,42 +262,58 @@ void get_n_col(char *filename)
 
 void run_cmd()
 {
+    char command[30];
+
     bool ongoing = true;
     while (ongoing)
     {
         printf("Enter Command: ");
-        char command = scanf("%s", &command); //With this it becomes difficult to check what command
+
+        scanf("%s", command); //With this it becomes difficult to check what command
+
+        /**
+         * User can avoid trying to be case sensitve and type command however they want
+         * */
+        for (char *lowercase_cmd = command; *lowercase_cmd; lowercase_cmd++)
+            *lowercase_cmd = tolower(*lowercase_cmd);
+
         /**
          * The scanf and if statements don't work properly need to fix
          * Find a way to split the string
          * */
-        if (true)
+        if (strcmp(command, "rq") == 0)
         {
             /**
              * Include content for if the user requests resources
              * */
+            printf("work rq\n");
         }
-        else if (true)
+        else if (strcmp(command, "rl") == 0)
         {
             /**
              * Include content for if the user wants to release resources
              * */
+            printf("work rl\n");
         }
-        else if (strcmp(command, "Status") == 0)
+        else if (strcmp(command, "status") == 0)
         {
             //Execute the status command
+            printf("status\n");
         }
-        else if (strcmp(command, "Run") == 0)
+        else if (strcmp(command, "run") == 0)
         {
             //execute the run command
+            printf("run\n");
         }
-        else if (strcmp(command, "Quit") == 0) //I think null means to stop from the example code unless we can make our own keyword
+        else if (strcmp(command, "quit") == 0)
         {
-            ongoing = false;
             printf("Exit\n");
+            ongoing = false;
         }
         else
+        {
             printf("Invalid Command. Retry and type the following {RQ, RL, Run, Status}\n");
+        }
     }
 }
 

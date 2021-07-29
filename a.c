@@ -242,35 +242,37 @@ bool safety(int *available, int *allocated, int *need)
     int safe_seq[n_rows];
     int ind = 0;
     int y = 0;
-    for (int i = 0; i < n_rows; i++)
+    for (int k = 0; k < n_rows; k++)
     {
-
-        if (finish[i] == false)
+        for (int i = 0; i < n_rows; i++)
         {
-            bool flag = false;
 
-            for (int j = 0; j < n_col; j++)
+            if (finish[i] == false)
             {
-                if (*((need + i * n_col) + j) > *(work + j)) // need[i][j] > allocated[i][j] (why do I need to do this, I hate C)
+                bool flag = false;
+
+                for (int j = 0; j < n_col; j++)
                 {
-                    flag = true;
-                    break;
+                    if (*((need + i * n_col) + j) > *(work + j)) // need[i][j] > allocated[i][j] (why do I need to do this, I hate C)
+                    {
+                        flag = true;
+                        break;
+                    }
                 }
-            }
 
-            if (flag == false)
-            {
-                safe_seq[ind++] = i;
-                for (y = 0; y < n_col; y++)
+                if (flag == false)
                 {
-                    available[y] += *((allocated + i * n_col) + y);
-                    finish[i] = 1;
+                    safe_seq[ind++] = i;
+                    for (y = 0; y < n_col; y++)
+                    {
+                        available[y] += *((allocated + i * n_col) + y);
+                        finish[i] = 1;
+                    }
                 }
             }
         }
-
         printf("The SAFE sequence is: ");
-        for (i = 0; i < n_rows - 1; i++)
+        for (int i = 0; i < n_rows - 1; i++)
         {
             printf(" P%d ->", safe_seq[i]);
         }

@@ -21,7 +21,7 @@ int n_col = -1;
 
 int readFileCustomers(char *fileName);
 void readFileSequences(char *fileName, int max[n_rows][n_col]);
-int safety(int safety_array[], int n);
+bool safety(int safety_array[], int n);
 int sum_arr(int arr[], int n);
 void get_n_col(char *filename);
 int bankersalgo();
@@ -182,8 +182,12 @@ int release_resource() // REMEMBER TO DEFINE ABOVE
 
 // Saftey algo mentioned in chapter 8
 // Use: find whether or not a system is in a safe state.
-int safety(int safety_array[], int n) // REMEMBER TO DEFINE ABOVE
+// Return: true - system is in a safe state
+//         false - system is not in a safe state
+bool safety(int safety_array[], int n)
 {
+    bool safe = false;
+
     /**Checks the array to
      * */
     for (int i = 0; i < n - 1; i++)
@@ -215,6 +219,8 @@ int safety(int safety_array[], int n) // REMEMBER TO DEFINE ABOVE
     //     {
     //     }
     // }
+
+    return safe;
 }
 
 int sum_arr(int arr[], int n)

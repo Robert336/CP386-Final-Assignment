@@ -21,7 +21,7 @@ int n_col = -1;
 
 int readFileCustomers(char *fileName);
 void readFileSequences(char *fileName, int max[n_rows][n_col]);
-bool safety(int safety_array[], int n);
+bool safety(int available[], int allocated[][], int need[][]);
 int sum_arr(int arr[], int n);
 void get_n_col(char *filename);
 int bankersalgo();
@@ -184,24 +184,32 @@ int release_resource() // REMEMBER TO DEFINE ABOVE
 // Use: find whether or not a system is in a safe state.
 // Return: true - system is in a safe state
 //         false - system is not in a safe state
-bool safety(int safety_array[], int n)
+bool safety(int available[], int allocated[][], int need[][])
 {
     bool safe = false;
+    int work[n_col];
+    for (int i = 0; i < n_col; i++) // work = available
+    {
+        work[i] = available[i];
+    }
 
-    /**Checks the array to
-     * */
-    for (int i = 0; i < n - 1; i++)
-        printf("%d", safety_array[i]);
-    printf("%d", safety_array[n - 1]);
-    //int work[] = available;
+    // initalize finish - 0, ..., n-1 = false
+    bool finish[n_rows];
+    for (int i = 0; i < n_rows; i++)
+    {
+        finish[i] = false;
+    }
 
-    // **HARD CODEED**
-    // initalize 0, ..., n-1 = false
-    bool finish[] = {false,
-                     false,
-                     false,
-                     false,
-                     false};
+    for (int i = 0; i < n_rows; i++)
+    {
+        for (int j = 0; j < n_col; j++)
+        {
+            if (finish[i] == false)
+            {
+                int flag = 0;
+            }
+        }
+    }
 
     //printf("test sizeof finish = %d\n", (int)(sizeof(finish) / sizeof(finish[0])));
     //printf("test sizeof available = %d\n", (int)(sizeof(available) / sizeof(available[0])));

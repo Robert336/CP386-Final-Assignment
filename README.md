@@ -1,19 +1,23 @@
 # CP386-Final-Assignment
 The final assignment of the CP386 (Operating Systems) course
 
-# Motivation
+## Motivation
+the honest answer: needs to be completed for marks :)
 
-# Installation
+## Installation
 
-# Screenshots
+## Screenshots
 
-# Individual contribution
+## Individual contribution
 
-# Features
-# Tests
-# Code Example
-# Authors
+## Features
+## Tests
+testing manually with print statements
+
+## Code Example
+## Authors
 - Robert Mazza
 - Jagveer Sangha
-# Credits
-# License
+## Credits
+## License
+MIT

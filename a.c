@@ -21,7 +21,7 @@ int n_col = -1;
 
 int readFileCustomers(char *fileName);
 void readFileSequences(char *fileName, int max[n_rows][n_col]);
-bool safety(int available[], int allocated[][], int need[][]);
+bool safety(int *available, int *allocated, int *need);
 int sum_arr(int arr[], int n);
 void get_n_col(char *filename);
 int bankersalgo();
@@ -206,13 +206,14 @@ int release_resource() // REMEMBER TO DEFINE ABOVE
 // Use: find whether or not a system is in a safe state.
 // Return: true - system is in a safe state
 //         false - system is not in a safe state
-bool safety(int available[], int allocated[][], int need[][])
+bool safety(int *available, int *allocated, int *need)
 {
-    bool safe = false;
+    bool safe = true;
     int work[n_col];
     for (int i = 0; i < n_col; i++) // work = available
     {
-        work[i] = available[i];
+        work[i] = *(available + i); // work[i] = available[i]
+        printf("work[%d] = %d", i, *(available + i));
     }
 
     // initalize finish - 0, ..., n-1 = false
@@ -222,33 +223,53 @@ bool safety(int available[], int allocated[][], int need[][])
         finish[i] = false;
     }
 
+    int safe_seq[n_rows];
+    int ind = 0;
+    int y = 0;
     for (int i = 0; i < n_rows; i++)
     {
-        for (int j = 0; j < n_col; j++)
+
+        if (finish[i] == false)
         {
-            if (finish[i] == false)
+            bool flag = false;
+
+            for (int j = 0; j < n_col; j++)
             {
-                int flag = 0;
+                if (*((need + i * n_col) + j) > *(work + j)) // need[i][j] > allocated[i][j] (why do I need to do this, I hate C)
+                {
+                    flag = true;
+                    break;
+                }
+            }
+
+            if (flag == false)
+            {
+                safe_seq[ind++] = i;
+                for (y = 0; y < n_col; y++)
+                {
+                    available[y] += *((allocated + i * n_col) + y);
+                    finish[i] = 1;
+                }
             }
         }
+
+        printf("The SAFE sequence is: ");
+        for (i = 0; i < n_rows - 1; i++)
+        {
+            printf(" P%d ->", safe_seq[i]);
+        }
+        printf(" P%d", safe_seq[n_rows - 1]);
     }
 
-    //printf("test sizeof finish = %d\n", (int)(sizeof(finish) / sizeof(finish[0])));
-    //printf("test sizeof available = %d\n", (int)(sizeof(available) / sizeof(available[0])));
-
-    // for (int i = 0; i < (sizeof(finish) / sizeof(finish[0])); i++)
-    // {
-    //     int need_n = (int)(sizeof(need[i]) / sizeof(need[i][0]));
-    //     int available_n = (int)(sizeof(available) / sizeof(available[0]));
-
-    //     printf("test >>> need_n = %d :: available_n = %d", need_n, available_n);
-
-    //     int need_sum = sum_arr(*need[i], need_n);
-    //     int available_sum = sum_arr(*available, available_n);
-    //     if (finish[i] == false && need_sum <= available_sum)
-    //     {
-    //     }
-    // }
+    // if all of the finish array is false, then it is safe
+    for (int i = 0; i < n_rows; i++)
+    {
+        if (finish[i] == false)
+        {
+            safe = false;
+            break;
+        }
+    }
 
     return safe;
 }

@@ -11,10 +11,10 @@
 // DATA STRUCTURES NEEDED FOR BANKERS ALGO
 // *** All data structures currently hard-coded size to match input file for testing ***
 
-// int *available;  // represents the number of available resources of each type
-// int *max;        // m x n matrix representing max number of instances of each resource that a process can request
-// int *allocation; // m x n matrix representing the num of resources of each type currently allocated to each process
-// int *need;       // m x n matrix representing the remaining resource needs of each process. Need[i][j] = max[i][j] - allocation[i][j]
+int *available_ptr;  // represents the number of available resources of each type
+int *max_ptr;        // m x n matrix representing max number of instances of each resource that a process can request
+int *allocation_ptr; // m x n matrix representing the num of resources of each type currently allocated to each process
+int *need_ptr;       // m x n matrix representing the remaining resource needs of each process. Need[i][j] = max[i][j] - allocation[i][j]
 
 int n_rows = -1;
 int n_col = -1;
@@ -107,7 +107,10 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
     //int *need = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
     int need[n_rows][n_col];
 
-    // safety(); // saftey algo
+    available_ptr = *available;   // represents the number of available resources of each type
+    max_ptr = *max;               // m x n matrix representing max number of instances of each resource that a process can request
+    allocation_ptr = *allocation; // m x n matrix representing the num of resources of each type currently allocated to each process
+    need_ptr = *need;
 
     printf("Maximum resources from file:\n");
     readFileSequences("sample4_in.txt", max);
@@ -221,6 +224,7 @@ int release_resource(int resource[]) // REMEMBER TO DEFINE ABOVE
         printf("%d ", resource[i]);
         printf("\n");
     }
+
     return 0;
 }
 

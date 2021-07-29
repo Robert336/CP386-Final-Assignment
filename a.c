@@ -262,14 +262,26 @@ void get_n_col(char *filename)
 
 void run_cmd()
 {
-    char command[30];
-
+    char command[100]; //Change command name to something else that matches bc its cmd and sequence
+    char cmd[2];
     bool ongoing = true;
+
+    /**
+ * The next ints are the values that come after the user enters the command
+ * */
+    // int array_row;      //after a command user enters the row of the array
+    // int r1, r2, r3, r4; //Customer sequence
     while (ongoing)
     {
         printf("Enter Command: ");
+        // %29s makes it so theres no buffer overload
+        //%d %d %d %d %d &array_row, &r1, &r2, &r3, &r4
+        // scanf("%29s", command); //With this it becomes difficult to check what command
 
-        scanf("%s", command); //With this it becomes difficult to check what command
+        fgets(command, 100, stdin);
+        char *onlyCommand = strtok(command, " "); //removes all white spaces and retrieves only the command
+
+        // strcpy(line, ptr);
 
         /**
          * User can avoid trying to be case sensitve and type command however they want
@@ -281,37 +293,48 @@ void run_cmd()
          * The scanf and if statements don't work properly need to fix
          * Find a way to split the string
          * */
-        if (strcmp(command, "rq") == 0)
+        // char *k = &command[0];
+        // printf("%s", k);
+        /**
+         * strcmp causes errors with not allowing a delemiter to work
+         * */
+        if (strstr(command, "rq") != NULL)
         {
+
             /**
              * Include content for if the user requests resources
              * */
             printf("work rq\n");
         }
-        else if (strcmp(command, "rl") == 0)
+        else if (strstr(command, "rl") != NULL)
         {
+
             /**
              * Include content for if the user wants to release resources
              * */
             printf("work rl\n");
         }
-        else if (strcmp(command, "status") == 0)
+        else if (strstr(command, "status") != NULL)
         {
+
             //Execute the status command
             printf("status\n");
         }
-        else if (strcmp(command, "run") == 0)
+        else if (strstr(command, "run") != NULL)
         {
             //execute the run command
+
             printf("run\n");
         }
-        else if (strcmp(command, "quit") == 0)
+        else if (strstr(command, "quit") != NULL)
         {
+
             printf("Exit\n");
             ongoing = false;
         }
         else
         {
+            // if (k != "run" && k != "quit" && k != "status" && k != "rl" && k != "rq")
             printf("Invalid Command. Retry and type the following {RQ, RL, Run, Status}\n");
         }
     }

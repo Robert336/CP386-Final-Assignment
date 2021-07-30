@@ -328,29 +328,29 @@ void status(int *available, int *max, int *allocation, int *need)
     printf("\n");
 
     printf("Maximum Resources:\n");
-    for (int i = 0; i < n_rows - 1; i++)
+    for (int i = 0; i < n_rows; i++)
     {
         for (int j = 0; j < n_col; j++)
         {
-            printf("%d ", *((max + i * n_rows) + j));
+            printf("%d ", *((max + i * n_col) + j));
         }
         printf("\n");
     }
     printf("Allocated Resources:\n");
-    for (int i = 0; i < n_rows - 1; i++)
+    for (int i = 0; i < n_rows; i++)
     {
         for (int j = 0; j < n_col; j++)
         {
-            printf("%d ", *((allocation + i * n_rows) + j));
+            printf("%d ", *((allocation + i * n_col) + j));
         }
         printf("\n");
     }
     printf("Need Resources:\n");
-    for (int i = 0; i < n_rows - 1; i++)
+    for (int i = 0; i < n_rows; i++)
     {
         for (int j = 0; j < n_col; j++)
         {
-            printf("%d ", *((need + i * n_rows) + j));
+            printf("%d ", *((need + i * n_col) + j));
         }
         printf("\n");
     }

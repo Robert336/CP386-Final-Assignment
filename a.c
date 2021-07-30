@@ -287,7 +287,7 @@ bool safety(int *available, int *allocated, int *need)
                         break;
                     }
                 }
-                if (j == n_rows)
+                if (j == n_col)
                 {
                     for (int y = 0; y < n_col; y++)
                     {
@@ -314,6 +314,8 @@ bool safety(int *available, int *allocated, int *need)
     }
     printf(" P%dn\n", safe_seq[n_rows - 1]);
 
+    free(work);
+    free(finish);
     return true;
 }
 

@@ -28,6 +28,7 @@ int bankersalgo();
 void run_cmd();
 int request_resource(int resource[]);
 int release_resource(int resource[]);
+void status(int *available, int *max, int *allocation, int *need);
 
 typedef struct thread //represents a single thread, you can add more members if required
 {
@@ -123,10 +124,10 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
         }
     }
 
-    // available_ptr = &available[0];   // represents the number of available resources of each type
-    // max_ptr = &max[0];               // m x n matrix representing max number of instances of each resource that a process can request
-    // allocation_ptr = &allocation[0]; // m x n matrix representing the num of resources of each type currently allocated to each process
-    // need_ptr = &need[0];
+    available_ptr = &available[0];      // represents the number of available resources of each type
+    max_ptr = &max[0][0];               // m x n matrix representing max number of instances of each resource that a process can request
+    allocation_ptr = &allocation[0][0]; // m x n matrix representing the num of resources of each type currently allocated to each process
+    need_ptr = &need[0][0];
 
     printf("\nTESTING >>>>\n");
     bool safe = safety(available, *allocation, *need);
@@ -314,6 +315,44 @@ bool safety(int *available, int *allocated, int *need)
     return true;
 }
 
+void status(int *available, int *max, int *allocation, int *need)
+{
+    printf("Currently Available resources: ");
+    for (int i = 0; i < n_col; i++)
+    {
+        printf("%d ", available[i]);
+    }
+    printf("\n");
+
+    printf("Maximum Resources:\n");
+    for (int i = 0; i < n_rows; i++)
+    {
+        for (int j = 0; j < n_col; j++)
+        {
+            printf("%d ", *((max + i * n_rows) + j));
+        }
+        printf("\n");
+    }
+    printf("Allocated Resources:\n");
+    for (int i = 0; i < n_rows; i++)
+    {
+        for (int j = 0; j < n_col; j++)
+        {
+            printf("%d ", *((allocation + i * n_rows) + j));
+        }
+        printf("\n");
+    }
+    printf("Need Resources:\n");
+    for (int i = 0; i < n_rows; i++)
+    {
+        for (int j = 0; j < n_col; j++)
+        {
+            printf("%d ", *((need + i * n_rows) + j));
+        }
+        printf("\n");
+    }
+}
+
 int sum_arr(int arr[], int n)
 {
     if (n > 0)
@@ -441,6 +480,7 @@ void run_cmd()
 
             //Execute the status command
             printf("status\n");
+            status(available_ptr, max_ptr, allocation_ptr, need_ptr);
         }
         else if (strstr(command, "run") != NULL)
         {

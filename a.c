@@ -107,13 +107,18 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
     //int *need = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
     int need[n_rows][n_col];
 
-    available_ptr = *available;   // represents the number of available resources of each type
-    max_ptr = *max;               // m x n matrix representing max number of instances of each resource that a process can request
-    allocation_ptr = *allocation; // m x n matrix representing the num of resources of each type currently allocated to each process
-    need_ptr = *need;
+    // available_ptr = &available[0];   // represents the number of available resources of each type
+    // max_ptr = &max[0];               // m x n matrix representing max number of instances of each resource that a process can request
+    // allocation_ptr = &allocation[0]; // m x n matrix representing the num of resources of each type currently allocated to each process
+    // need_ptr = &need[0];
 
     printf("Maximum resources from file:\n");
     readFileSequences("sample4_in.txt", max);
+
+    printf("\nTESTING >>>>\n");
+    bool safe = safety(available, *allocation, *need);
+    printf("SAFE = %d", safe);
+    printf("\n<<<<<<<<<<<<<\n");
 
     // Finish bankersalgo
 
@@ -234,13 +239,13 @@ int release_resource(int resource[]) // REMEMBER TO DEFINE ABOVE
 //         false - system is not in a safe state
 bool safety(int *available, int *allocated, int *need)
 {
-    bool safe = true;
     int work[n_col];
     for (int i = 0; i < n_col; i++) // work = available
     {
         work[i] = *(available + i); // work[i] = available[i]
-        printf("work[%d] = %d", i, *(available + i));
+        printf("work[%d] = %d ", i, *(available + i));
     }
+    printf("\n");
 
     // initalize finish - 0, ..., n-1 = false
     bool finish[n_rows];
@@ -250,56 +255,52 @@ bool safety(int *available, int *allocated, int *need)
     }
 
     int safe_seq[n_rows];
+
     int ind = 0;
     int y = 0;
     for (int k = 0; k < n_rows; k++)
     {
+        bool found = false;
         for (int i = 0; i < n_rows; i++)
         {
-
             if (finish[i] == false)
             {
-                bool flag = false;
-
-                for (int j = 0; j < n_col; j++)
+                int j = 0;
+                for (j = 0; j < n_col; j++)
                 {
-                    if (*((need + i * n_col) + j) > *(work + j)) // need[i][j] > allocated[i][j] (why do I need to do this, I hate C)
+                    if (*((need + i * n_col) + j) > work[j]) // need[i][j] > allocated[i][j] (why do I need to do this, I hate C)
                     {
-                        flag = true;
                         break;
                     }
                 }
-
-                if (flag == false)
+                if (j == n_rows)
                 {
-                    safe_seq[ind++] = i;
                     for (y = 0; y < n_col; y++)
                     {
-                        available[y] += *((allocated + i * n_col) + y);
-                        finish[i] = 1;
+                        work[y] += *((allocated + i * n_col) + y);
                     }
+                    finish[i] = true;
+
+                    found = true;
+                    safe_seq[ind++] = i;
                 }
             }
         }
-        printf("The SAFE sequence is: ");
-        for (int i = 0; i < n_rows - 1; i++)
+        if (found == false)
         {
-            printf(" P%d ->", safe_seq[i]);
+            printf("System is not in safe state");
+            return false;
         }
-        printf(" P%d", safe_seq[n_rows - 1]);
     }
 
-    // if all of the finish array is false, then it is safe
-    for (int i = 0; i < n_rows; i++)
+    printf("The SAFE sequence is: ");
+    for (int i = 0; i < n_rows - 1; i++)
     {
-        if (finish[i] == false)
-        {
-            safe = false;
-            break;
-        }
+        printf(" P%d ->", safe_seq[i]);
     }
+    printf(" P%dn\n", safe_seq[n_rows - 1]);
 
-    return safe;
+    return true;
 }
 
 int sum_arr(int arr[], int n)

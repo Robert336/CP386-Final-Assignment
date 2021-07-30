@@ -312,10 +312,10 @@ bool safety(int *available, int *allocated, int *need)
     {
         printf(" P%d ->", safe_seq[i]);
     }
-    printf(" P%dn\n", safe_seq[n_rows - 1]);
+    printf(" P%d\n", safe_seq[n_rows - 1]);
 
-    free(work);
-    free(finish);
+    //free(work);
+    //free(finish);
     return true;
 }
 

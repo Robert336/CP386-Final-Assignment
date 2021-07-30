@@ -97,27 +97,39 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
     // *****intialize ALLOCATION*****
     //int *allocation = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
     int allocation[n_rows][n_col];
+    for (int i = 0; i < n_rows; i++)
+    {
+        for (int j = 0; j < n_col; j++)
+        {
+            allocation[i][j] = 0;
+        }
+    }
 
     // *****intialize MAX*****
     int max[n_rows][n_col];
     //int *max = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
     // MAX array is filled with the data from the textfile
+    printf("Maximum resources from file:\n");
+    readFileSequences("sample4_in.txt", max);
 
     // *****intialize NEED*****
     //int *need = (int *)malloc(n_col * n_rows * sizeof(int)); // initalize 2D array
     int need[n_rows][n_col];
+    for (int i = 0; i < n_rows; i++)
+    {
+        for (int j = 0; j < n_col; j++)
+        {
+            need[i][j] = max[i][j] - allocation[i][j];
+        }
+    }
 
     // available_ptr = &available[0];   // represents the number of available resources of each type
     // max_ptr = &max[0];               // m x n matrix representing max number of instances of each resource that a process can request
     // allocation_ptr = &allocation[0]; // m x n matrix representing the num of resources of each type currently allocated to each process
     // need_ptr = &need[0];
 
-    printf("Maximum resources from file:\n");
-    readFileSequences("sample4_in.txt", max);
-
     printf("\nTESTING >>>>\n");
     bool safe = safety(available, *allocation, *need);
-    printf("SAFE = %d", safe);
     printf("\n<<<<<<<<<<<<<\n");
 
     // Finish bankersalgo
@@ -257,8 +269,7 @@ bool safety(int *available, int *allocated, int *need)
     int safe_seq[n_rows];
 
     int ind = 0;
-    int y = 0;
-    for (int k = 0; k < n_rows; k++)
+    while (ind < n_rows)
     {
         bool found = false;
         for (int i = 0; i < n_rows; i++)
@@ -275,7 +286,7 @@ bool safety(int *available, int *allocated, int *need)
                 }
                 if (j == n_rows)
                 {
-                    for (y = 0; y < n_col; y++)
+                    for (int y = 0; y < n_col; y++)
                     {
                         work[y] += *((allocated + i * n_col) + y);
                     }

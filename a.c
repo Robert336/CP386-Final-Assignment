@@ -202,6 +202,8 @@ void readFileSequences(char *fileName, int max[n_rows][n_col])
                 //printf("\n");
                 //printf(" %d ", atoi(token));
                 max[i][j] = atoi(token);
+                // printf("j: %d\n", *max[j]);
+                // printf("i: %d\n", *max[i]);
                 token = strtok(NULL, ",");
                 j += 1;
             }
@@ -322,10 +324,11 @@ void status(int *available, int *max, int *allocation, int *need)
     {
         printf("%d ", available[i]);
     }
+
     printf("\n");
 
     printf("Maximum Resources:\n");
-    for (int i = 0; i < n_rows; i++)
+    for (int i = 0; i < n_rows - 1; i++)
     {
         for (int j = 0; j < n_col; j++)
         {
@@ -334,7 +337,7 @@ void status(int *available, int *max, int *allocation, int *need)
         printf("\n");
     }
     printf("Allocated Resources:\n");
-    for (int i = 0; i < n_rows; i++)
+    for (int i = 0; i < n_rows - 1; i++)
     {
         for (int j = 0; j < n_col; j++)
         {
@@ -343,7 +346,7 @@ void status(int *available, int *max, int *allocation, int *need)
         printf("\n");
     }
     printf("Need Resources:\n");
-    for (int i = 0; i < n_rows; i++)
+    for (int i = 0; i < n_rows - 1; i++)
     {
         for (int j = 0; j < n_col; j++)
         {

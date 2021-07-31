@@ -121,7 +121,10 @@ Terminates the program
 Enter Command: exit
 ```
 ## Tests
-Testing manually with print statements
+Manual test cases.
+<details>
+<img src="https://imgur.com/a/TGujBYH">
+</details>
 
 ## Code Example
 ## Authors

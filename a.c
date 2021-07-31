@@ -567,7 +567,7 @@ int sum_arr(int arr[], int n)
         }
         return sum;
     }
-    // return -1;
+    return -1;
 }
 
 void get_n_col(char *filename)

@@ -5,7 +5,9 @@ The final assignment of the CP386 (Operating Systems) course
 the honest answer: needs to be completed for marks :)
 
 ## Installation
+1. clone the repository
 
+2. then either compile and run the program manually, or use the makefile.
 ## Screenshots
 
 ## Individual contribution

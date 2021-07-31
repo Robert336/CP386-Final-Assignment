@@ -260,11 +260,11 @@ int request_resource(int args[]) // REMEMBER TO DEFINE ABOVE
             for (i = 0; i < n_col; i++)
             {
                 available_ptr[i] -= request[i];
-                *((allocation_ptr + customer_num * n_rows) + i) += request[i]; // NOTE: USING N_ROWS
+                *((allocation_ptr + customer_num * n_col) + i) += request[i]; // NOTE: USING N_ROWS
                 printf("\ntesterino >>>> \n");
-                printf("%d ", *((allocation_ptr + customer_num * n_rows) + i));
+                printf("%d ", *((allocation_ptr + customer_num * n_col) + i));
                 printf("\n<<<< testerino over\n");
-                *((need_ptr + customer_num * n_rows) + i) -= request[i];
+                *((need_ptr + customer_num * n_col) + i) -= request[i];
 
                 ///Create threads here or other spot?
                 // pthread_t tid;
@@ -282,8 +282,8 @@ int request_resource(int args[]) // REMEMBER TO DEFINE ABOVE
                 for (i = 0; i < n_col; i++)
                 {
                     available_ptr[i] += request[i];
-                    *((allocation_ptr + customer_num * n_rows) + i) -= request[i]; // NOTE: USING N_ROWS
-                    *((need_ptr + customer_num * n_rows) + i) += request[i];
+                    *((allocation_ptr + customer_num * n_col) + i) -= request[i]; // NOTE: USING N_ROWS
+                    *((need_ptr + customer_num * n_col) + i) += request[i];
                 }
                 return 0; // request not satisfied, oof
             }
@@ -324,7 +324,7 @@ int release_resource(int args[]) // REMEMBER TO DEFINE ABOVE
     // check for a cheeky duplication glitch of adding extra resources to the pool
     for (i = 0; i < n_col; i++)
     {
-        if (resources[i] > *((allocation_ptr + customer_num * n_rows) + i))
+        if (resources[i] > *((allocation_ptr + customer_num * n_col) + i))
         {
             is_valid = false;
         }
@@ -333,7 +333,7 @@ int release_resource(int args[]) // REMEMBER TO DEFINE ABOVE
             for (i = 0; i < n_col; i++)
             {
                 available_ptr[i] += resources[i];
-                *((allocation_ptr + customer_num * n_rows) + i) -= resources[i];
+                *((allocation_ptr + customer_num * n_col) + i) -= resources[i];
                 //*((need_ptr + customer_num * n_rows) + i) += resources[i];
             }
             return 1; // success

@@ -16,6 +16,7 @@ Run the follow command
 `gcc -o [ANY NAME] [.c FILE NAME] -lpthread -lrt`
 Then, 
 `./[ANY NAME] X X X X`
+
 **note** - [ANY NAME] should be the same from both steps, and Xs get replaced with intagers
 
 - Option 2 - use the Make file

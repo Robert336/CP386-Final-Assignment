@@ -1,5 +1,10 @@
-# CP386-Final-Assignment
-The final assignment of the CP386 (Operating Systems) course
+<h1 align="center">Bankers Algorithm - CP386</h1>
+
+## Description
+Creating the Bankers Algorithm. Banker's algo is used as a resource allocation which incorperates deadlock avoidance through testing if the program is in a "safe" state before allocating the resources to customers. 
+
+
+The final assignment of the CP386 (Operating Systems) course. 
 
 ## Motivation
 the honest answer: needs to be completed for marks :)

@@ -55,6 +55,7 @@ Then,
 ## Features
 ### Commands
 - Rquest Resource | RQ
+
 Assigns resources to a specific customer from the available resources
 
 ```
@@ -62,6 +63,7 @@ Enter Command: RQ 1 2 3 1 1
 ```
 
 - Release Resource | RL
+
 Releases resource that are in use by a customer.
 
 ```
@@ -69,19 +71,28 @@ Enter Command: RL 1 1 1 1 1
 ```
 
 - Run | run
+
 Runs all the threads in it's safe sequence
 
-`Enter Command: run`
+```
+Enter Command: run
+```
 
 - Status | status
+
 Displays the current status of all the matricies
 
-`Enter Command: status`
+```
+Enter Command: status
+```
 
 - Exit | exit
+
 Terminates the program
 
-`Enter Command: exit`
+```
+Enter Command: exit
+```
 ## Tests
 Testing manually with print statements
 

@@ -16,11 +16,11 @@ The final assignment of the CP386 (Operating Systems) course.
 - GCC compiler
 
 ### Steps
-1. Clone the repository
+Step 1 - Clone the repository
 
-2. Run the program (2 options)
+Step 2 - Run the program (2 options see below)
 
-#### Option 1 - Compile and run the program manually
+#### Option A - Compile and run the program manually
 
 Compile the .c file manually with the following line in the command line by navigating to the path which the files are located.
 
@@ -28,13 +28,18 @@ Run the follow command
 
 `gcc -o [ANY NAME] [.c FILE NAME] -lpthread -lrt`
 
-Then, 
+Then, `./[ANY NAME] X X X X`
 
-`./[ANY NAME] X X X X`
+
 
 **note** - [ANY NAME] should be the same from both steps, and Xs get replaced with integers corrisponding to the resources available
 
-#### Option 2 - use the Make file
+<details>
+<summary>Sample execution</summary>
+<img src="./create.png">
+</details>
+
+#### Option B - use the Make file
 
 In the terminal run `make`, then `make runq1` to execute the program
 

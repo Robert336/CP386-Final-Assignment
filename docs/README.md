@@ -131,8 +131,9 @@ Terminates the program
 Enter Command: exit
 ```
 ## Tests
-Manual test cases.
+Manual test cases, and lots of printf()
 <details>
+ <summary>Sample case</summary>
  <img src="./test 1.png">
 </details>
 

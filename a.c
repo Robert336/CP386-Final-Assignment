@@ -245,6 +245,7 @@ int request_resource(int args[]) // REMEMBER TO DEFINE ABOVE
     for (i = 0; i < n_col && is_valid; i++)
     {
         //printf("%d ", *(need_ptr + (customer_num * n_col + i)));
+        // is_valid = request[i] <= *((need_ptr + customer_num * n_col) + i);
         is_valid = request[i] <= *(need_ptr + (customer_num * n_col + i)); // request[i] <= need[customer_num][i]
     }
 
@@ -371,22 +372,22 @@ void *thread_run()
     }
     for (int i = 0; i < j; i++)
     {
-        printf("--> Customer/Thread %d", args[i]);
-        printf("\tAllocated resources: %d", allocation_ptr[i]); //a tab is about the same spacing as the -->
-        printf("Needed: %d", need_ptr[i]);
-        printf("Available: %d", available_ptr[i]);
+        printf("--> Customer/Thread %d\n", args[i]);
+        printf("\tAllocated resources: %d\n", allocation_ptr[i]); //a tab is about the same spacing as the -->
+        printf("\tNeeded: %d\n", need_ptr[i]);
+        printf("\tAvailable: %d\n", available_ptr[i]);
         ///Create threads
         pthread_t tid;
         pthread_create(&tid, NULL, thread_run, &args[i]);
-        pthread_join(tid, NULL);
+        // pthread_join(tid, NULL);
         ///All the threads join and can be called later
-        printf("Thread has started");
-        printf("Thread has finished");
-        printf("Thread is releasing resources");
+        printf("Thread has started\n");
+        printf("Thread has finished\n");
+        printf("Thread is releasing resources\n");
         release_resource(allocation_ptr);
-        printf("New Available: %d", available_ptr[i]);
+        printf("New Available: %d\n", available_ptr[i]);
         //Include pthread create here
-        pthread_kill(tid, NULL);
+        // pthread_kill(tid, NULL);
     }
     return NULL;
 }

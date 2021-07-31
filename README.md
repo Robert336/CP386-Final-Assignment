@@ -5,7 +5,11 @@ The final assignment of the CP386 (Operating Systems) course
 the honest answer: needs to be completed for marks :)
 
 ## Installation
-### LINUX
+### PRE-REQ
+- Linux system
+- GCC compiler
+
+### Steps
 1. clone the repository
 
 2. 
@@ -45,15 +49,57 @@ Then,
 
 `void status(int *available, int *max, int *allocation, int *need);` - Robert, Jagveer
 
+`Blood, sweat, and tears` - Robert and Jagveer equally.
+
 
 ## Features
+### Commands
+#### Rquest Resource | RQ
+
+Assigns resources to a specific customer from the available resources
+
+```
+Enter Command: RQ 1 2 3 1 1
+```
+
+#### Release Resource | RL
+
+Releases resource that are in use by a customer.
+
+```
+Enter Command: RL 1 1 1 1 1
+```
+
+#### Run | run
+
+Runs all the threads in it's safe sequence
+
+```
+Enter Command: run
+```
+
+#### Status | status
+
+Displays the current status of all the matricies
+
+```
+Enter Command: status
+```
+
+#### Exit | exit
+
+Terminates the program
+
+```
+Enter Command: exit
+```
 ## Tests
-testing manually with print statements
+Testing manually with print statements
 
 ## Code Example
 ## Authors
-- Robert Mazza
-- Jagveer Sangha
+- [Robert Mazza](https://github.com/Robert336)
+- [Jagveer Sangha](https://github.com/Jagveer-Sangha)
 ## Credits
 ## License
 MIT

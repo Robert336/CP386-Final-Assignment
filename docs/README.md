@@ -35,15 +35,19 @@ Then,
 First thing that appears when launching the program
 
 Sample requets command output (RQ)
+
 <img src="./rq.png">
 
 Sample release command output (RL)
+
 <img src="./release.png">
 
 Sample status command output (status)
+
 <img src="./status.png">
 
 Sample run command output (run)
+
 <img src="./run.png">
 
 ## Individual contribution

@@ -16,8 +16,8 @@ int *max_ptr;        // m x n matrix representing max number of instances of eac
 int *allocation_ptr; // m x n matrix representing the num of resources of each type currently allocated to each process
 int *need_ptr;       // m x n matrix representing the remaining resource needs of each process. Need[i][j] = max[i][j] - allocation[i][j]
 
-int n_rows = -1;
-int n_col = -1;
+int n_rows = -1; // number of customers
+int n_col = -1;  // number of resources
 
 int readFileCustomers(char *fileName);
 void readFileSequences(char *fileName, int max[n_rows][n_col]);
@@ -26,7 +26,7 @@ int sum_arr(int arr[], int n);
 void get_n_col(char *filename);
 int bankersalgo();
 void run_cmd();
-int request_resource(int resource[]);
+int request_resource(int args[]);
 int release_resource(int resource[]);
 void status(int *available, int *max, int *allocation, int *need);
 
@@ -222,15 +222,73 @@ int bankersalgo() // REMEMBER TO DEFINE ABOVE
 // function to request a resource
 // Return: 0 = Sucess
 // Return: -1 = Failed
-int request_resource(int resource[]) // REMEMBER TO DEFINE ABOVE
+int request_resource(int args[]) // REMEMBER TO DEFINE ABOVE
 {
-    //Testing
-    for (int i = 0; i < n_col + 1; i++)
+    // //Testing
+    // for (int i = 0; i < n_col + 1; i++)
+    // {
+    //     printf("%d ", args[i]);
+    //     printf("\n");
+    // }
+    int customer_num = args[0];     // first number in the command represents the customer number
+    int request[n_col];             // resources from the command line
+    for (int i = 0; i < n_col; i++) // sperating the resources from the customer number
     {
-        printf("%d ", resource[i]);
-        printf("\n");
+        request[i] = args[i + 1];
+        //printf("%d ", request[i]);
     }
-    return 0;
+
+    bool is_valid;
+    // check of the request doesn't exceed what the customer needs
+
+    int i;
+    for (i = 0; i < n_col && is_valid; i++)
+    {
+        //printf("%d ", *(need_ptr + (customer_num * n_col + i)));
+        is_valid = request[i] <= *(need_ptr + (customer_num * n_col + i)); // request[i] <= need[customer_num][i]
+    }
+
+    if (is_valid == true)
+    {
+        for (i = 0; i < n_col && is_valid; i++)
+        {
+            is_valid = request[i] <= *(available_ptr + i); // request[i <= available[i]
+        }
+        if (is_valid == true)
+        {
+            for (i = 0; i < n_col; i++)
+            {
+                available_ptr[i] -= request[i];
+                *((allocation_ptr + customer_num * n_rows) + i) += request[i]; // NOTE: USING N_ROWS
+                printf("\ntesterino >>>> \n");
+                printf("%d ", *((allocation_ptr + customer_num * n_rows) + i));
+                printf("\n<<<< testerino over\n");
+                *((need_ptr + customer_num * n_rows) + i) -= request[i];
+            }
+            if (safety(available_ptr, allocation_ptr, need_ptr)) // might break, idk :)
+            {
+                return 1; // request satisfied, poggers
+            }
+            else // unsafe, undo changes pronto!
+            {
+                for (i = 0; i < n_col; i++)
+                {
+                    available_ptr[i] += request[i];
+                    *((allocation_ptr + customer_num * n_rows) + i) -= request[i]; // NOTE: USING N_ROWS
+                    *((need_ptr + customer_num * n_rows) + i) += request[i];
+                }
+                return 0; // request not satisfied, oof
+            }
+        }
+        else
+        {
+            return 0; // not enough resources
+        }
+    }
+    else
+    {
+        return 0; // exceeds max, not satisfied
+    }
 }
 
 // function to release a resource

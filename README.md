@@ -1,8 +1,14 @@
-# CP386-Final-Assignment
-The final assignment of the CP386 (Operating Systems) course
+<h1 align="center">Bankers Algorithm - CP386</h1>
+
+
+## Description
+Creating the Bankers Algorithm. Banker's algo is used for resource allocation, as it incorperates deadlock avoidance through testing if the program is in a "safe" state before allocating the resources to customers. 
+
+
+The final assignment of the CP386 (Operating Systems) course. 
 
 ## Motivation
-the honest answer: needs to be completed for marks :)
+*The honest answer: needs to be completed for marks :)*
 
 ## Installation
 ### PRE-REQ
@@ -10,9 +16,9 @@ the honest answer: needs to be completed for marks :)
 - GCC compiler
 
 ### Steps
-1. clone the repository
+1. Clone the repository
 
-2. 
+2. Run the program (2 options)
 - Option 1 - Compile and run the program manually
 Compile the .c file manually with the following line in the command line by navigating to the path which the files are located.
 
@@ -101,5 +107,12 @@ Testing manually with print statements
 - [Robert Mazza](https://github.com/Robert336)
 - [Jagveer Sangha](https://github.com/Jagveer-Sangha)
 ## Credits
+[GeeksforGeeks](https://www.geeksforgeeks.org/bankers-algorithm-in-operating-system-2/)
+
+[StudyTonight](https://www.studytonight.com/operating-system/bankers-algorithm)
+
 ## License
-MIT
+This project is licensed under the MIT License.
+
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Robert336/CP386-Final-Assignment/blob/main/LICENSE)
+

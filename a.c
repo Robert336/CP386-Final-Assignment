@@ -273,11 +273,6 @@ int request_resource(int args[]) // REMEMBER TO DEFINE ABOVE
             }
             if (safety(available_ptr, allocation_ptr, need_ptr)) // might break, idk :)
             {
-                ///Create threads
-                pthread_t tid;
-                pthread_create(&tid, NULL, thread_run, &customer_num);
-                pthread_join(tid, NULL);
-                ///All the threads join and can be called later
 
                 return 1; // request satisfied, poggers
             }
@@ -344,14 +339,21 @@ void *thread_run()
     for (int i = 0; i < j; i++)
     {
         printf("--> Customer/Thread %d", args[i]);
-        printf("\tAllocated resources: %d", ); //a tab is about the same spacing as the -->
-        printf("Needed: %d", );
-        printf("Available: %d", );
+        printf("\tAllocated resources: %d", allocation_ptr[i]); //a tab is about the same spacing as the -->
+        printf("Needed: %d", need_ptr[i]);
+        printf("Available: %d", available_ptr[i]);
+        ///Create threads
+        pthread_t tid;
+        pthread_create(&tid, NULL, thread_run, &args[i]);
+        pthread_join(tid, NULL);
+        ///All the threads join and can be called later
         printf("Thread has started");
         printf("Thread has finished");
         printf("Thread is releasing resources");
-        printf("New Available: %d", );
-        pthread_kill();
+        // release_resource();
+        printf("New Available: %d", available_ptr[i]);
+        //Include pthread create here
+        pthread_kill(tid, NULL);
     }
     return NULL;
 }

@@ -33,10 +33,10 @@ Then,
 ## Screenshots
 
 First thing that appears when launching the program
-<img src="https://imgur.com/a/BT0SgE9">
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/BT0SgE9"  ><a href="//imgur.com/a/BT0SgE9">bankers algo launch</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 Sample requets command output (RQ)
-<img src="https://imgur.com/a/uwD3cWu">
+<img src="https://github.com/Robert336/CP-386-Final-Assignment/blob/main/docs/rq.png">
 
 Sample release command output (RL)
 <img src="https://imgur.com/a/GRzlFI8">

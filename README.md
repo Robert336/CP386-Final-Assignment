@@ -1,5 +1,6 @@
 <h1 align="center">Bankers Algorithm - CP386</h1>
 
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Robert336/CP386-Final-Assignment/blob/main/LICENSE)
 ## Description
 Creating the Bankers Algorithm. Banker's algo is used for resource allocation, as it incorperates deadlock avoidance through testing if the program is in a "safe" state before allocating the resources to customers. 
 
@@ -107,6 +108,7 @@ Testing manually with print statements
 - [Jagveer Sangha](https://github.com/Jagveer-Sangha)
 ## Credits
 [GeeksforGeeks](https://www.geeksforgeeks.org/bankers-algorithm-in-operating-system-2/)
+
 [StudyTonight](https://www.studytonight.com/operating-system/bankers-algorithm)
 
 ## License

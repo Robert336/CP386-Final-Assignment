@@ -27,7 +27,7 @@ void get_n_col(char *filename);
 int bankersalgo();
 void run_cmd();
 int request_resource(int args[]);
-int release_resource(int resource[]);
+int release_resource(int args[]);
 void status(int *available, int *max, int *allocation, int *need);
 
 typedef struct thread //represents a single thread, you can add more members if required
@@ -306,13 +306,46 @@ int request_resource(int args[]) // REMEMBER TO DEFINE ABOVE
 // function to release a resource
 // Return: 0 = Sucess
 // Return: -1 = Failed
-int release_resource(int resource[]) // REMEMBER TO DEFINE ABOVE
+int release_resource(int args[]) // REMEMBER TO DEFINE ABOVE
 {
-    //Testing
-    for (int i = 0; i < n_col + 1; i++)
+    // //Testing
+    // for (int i = 0; i < n_col + 1; i++)
+    // {
+    //     printf("%d ", args[i]);
+    //     printf("\n");
+    // }
+    int i;
+    int customer_num = args[0];
+    int resources[n_col];
+
+    bool is_valid = true;
+
+    for (i = 0; i < n_col; i++)
     {
-        printf("%d ", resource[i]);
-        printf("\n");
+        resources[i] = args[i + 1];
+    }
+
+    // check for a cheeky duplication glitch of adding extra resources to the pool
+    for (i = 0; i < n_col; i++)
+    {
+        if (resources[i] > *((allocation_ptr + customer_num * n_rows) + i))
+        {
+            is_valid = false;
+        }
+        if (is_valid == true)
+        {
+            for (i = 0; i < n_col; i++)
+            {
+                available_ptr[i] += resources[i];
+                *((allocation_ptr + customer_num * n_rows) + i) -= resources[i];
+                //*((need_ptr + customer_num * n_rows) + i) += resources[i];
+            }
+            return 1; // success
+        }
+        else
+        {
+            return 0; // cannot release
+        }
     }
 
     return 0;

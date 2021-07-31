@@ -383,7 +383,7 @@ void *thread_run()
         printf("Thread has started");
         printf("Thread has finished");
         printf("Thread is releasing resources");
-        // release_resource();
+        release_resource(allocation_ptr);
         printf("New Available: %d", available_ptr[i]);
         //Include pthread create here
         pthread_kill(tid, NULL);

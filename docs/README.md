@@ -19,17 +19,25 @@ The final assignment of the CP386 (Operating Systems) course.
 1. Clone the repository
 
 2. Run the program (2 options)
-- Option 1 - Compile and run the program manually
+
+#### Option 1 - Compile and run the program manually
+
 Compile the .c file manually with the following line in the command line by navigating to the path which the files are located.
 
 Run the follow command 
+
 `gcc -o [ANY NAME] [.c FILE NAME] -lpthread -lrt`
+
 Then, 
+
 `./[ANY NAME] X X X X`
 
-**note** - [ANY NAME] should be the same from both steps, and Xs get replaced with integers
+**note** - [ANY NAME] should be the same from both steps, and Xs get replaced with integers corrisponding to the resources available
 
-- Option 2 - use the Make file
+#### Option 2 - use the Make file
+
+In the terminal run `make`, then `make runq1` to execute the program
+
 ## Screenshots
 
 First thing that appears when launching the program
@@ -77,6 +85,8 @@ Sample run command output (run)
 
 
 ## Features
+
+*The program was designed to be dynamic. The number of customers and resources are based on the text file matrix*
 ### Commands
 
 Can enter commands in either lower case or upper case

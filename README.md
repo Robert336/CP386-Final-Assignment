@@ -123,7 +123,7 @@ Enter Command: exit
 ## Tests
 Manual test cases.
 <details>
-<img src="https://imgur.com/a/TGujBYH">
+![alt text](https://imgur.com/a/TGujBYH)
 </details>
 
 ## Code Example

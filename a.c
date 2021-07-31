@@ -354,39 +354,42 @@ void *thread_run()
     printf("Safe Sequence is: ");
     fgets(sequence, 100, stdin);
     printf("\n");
-    char *nums = strtok(sequence, " "); //removes all white spaces and retrieves only the nums
+    char *token = strtok(sequence, " "); //removes all white spaces and retrieves only the nums
     // printf("nums >>> %s\n", nums);
 
     int args[5];
-    char *token;
-    token = strtok(NULL, " ");
+    // char *token = strtok(NULL, "  ");
     int j = 0;
     while (token != NULL)
     {
         // printf("\n");
         // printf(" %d ", atoi(token));
+
         args[j] = atoi(token);
         // printf("%d ", args[j]);
         token = strtok(NULL, " ");
         j += 1;
+        // printf("%d", args[j]);
     }
     // j += 1;
-    for (int i = 0; i < j + 1; i++)
+    // printf("%d\n", args[0]);
+    for (int i = 0; i < j; i++)
     {
         printf("--> Customer/Thread %d\n", args[i]);
-        printf("\tAllocated resources: %d\n", allocation_ptr[i]); //a tab is about the same spacing as the -->
-        printf("\tNeeded: %d\n", need_ptr[i]);
-        printf("\tAvailable: %d\n", available_ptr[i]);
+        printf("\tAllocated resources: %d %d %d %d\n", allocation_ptr[i * n_col], allocation_ptr[i * n_col + 1], allocation_ptr[i * n_col + 2], allocation_ptr[i * n_col + 3]); //a tab is about the same spacing as the -->
+        printf("\tNeeded: %d %d %d %d\n", need_ptr[i * n_col], need_ptr[i * n_col + 1], need_ptr[i * n_col + 2], need_ptr[i * n_col + 3]);
+        printf("\tAvailable: %d %d %d %d\n", available_ptr[i], available_ptr[i + 1], available_ptr[i + 2], available_ptr[i + 3]); // Doesnt work proeprly
+
         ///Create threads
-        pthread_t tid;
-        pthread_create(&tid, NULL, thread_run, &args[i]);
+        // pthread_t tid;
+        // pthread_create(&tid, NULL, thread_run, &args[i]); // Threading creates the sequence in random spots bug
         // pthread_join(tid, NULL);
         printf("\tThread has started\n");
-        pthread_cancel(tid);
+        // pthread_cancel(tid);
         printf("\tThread has finished\n");
         printf("\tThread is releasing resources\n");
-        release_resource(allocation_ptr);
-        printf("\tNew Available: %d\n", available_ptr[i]);
+        release_resource(&allocation_ptr[i * n_col]); //idk?
+        printf("\tNew Available: %d %d %d %d\n", available_ptr[i * n_rows], available_ptr[i * n_rows + 1], available_ptr[i * n_rows + 2], available_ptr[i * n_rows + 3]);
         //Include pthread create here
         // pthread_kill(tid, &args[i]);
     }

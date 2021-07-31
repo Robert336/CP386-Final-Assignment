@@ -32,6 +32,24 @@ Then,
 - Option 2 - use the Make file
 ## Screenshots
 
+First thing that appears when launching the program
+<img src="https://imgur.com/a/BT0SgE9">
+
+Sample requets command output (RQ)
+<img src="https://imgur.com/a/uwD3cWu">
+
+Sample release command output (RL)
+<img src="https://imgur.com/a/GRzlFI8">
+
+Sample status command output (status)
+<img src="https://imgur.com/a/fl1qe8c">
+
+Sample run command output (run)
+<img src="https://imgur.com/a/fREgL9x">
+
+
+
+
 ## Individual contribution
 *(author, co-author)*
 

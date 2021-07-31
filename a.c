@@ -1,3 +1,9 @@
+/*
+* @Robert336 - 190778040
+* @Jagveer-Sangha - 190612960
+* Github repo: https://github.com/Robert336/CP386-Final-Assignment
+*/
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,8 +15,6 @@
 #include <stdbool.h>
 #include <ctype.h> //For run_cmd
 // DATA STRUCTURES NEEDED FOR BANKERS ALGO
-// *** All data structures currently hard-coded size to match input file for testing ***
-
 int *available_ptr;  // represents the number of available resources of each type
 int *max_ptr;        // m x n matrix representing max number of instances of each resource that a process can request
 int *allocation_ptr; // m x n matrix representing the num of resources of each type currently allocated to each process
@@ -446,10 +450,13 @@ void *thread_run()
     }
     return NULL;
 }
-// Saftey algo mentioned in chapter 8
-// Use: find whether or not a system is in a safe state.
-// Return: true - system is in a safe state
-//         false - system is not in a safe state
+
+/* 
+    Saftey algo 
+    Use: find whether or not a system is in a safe state.
+    Return: true - system is in a safe state
+    false - system is not in a safe state
+*/
 bool safety(int *available, int *allocated, int *need)
 {
     int work[n_col];
@@ -467,13 +474,13 @@ bool safety(int *available, int *allocated, int *need)
         finish[i] = false;
     }
 
-    int safe_seq[n_col];
+    int safe_seq[n_rows];
 
     int ind = 0;
-    while (ind < n_col)
+    while (ind < n_rows)
     {
         bool found = false;
-        for (int i = 0; i < n_col; i++)
+        for (int i = 0; i < n_rows; i++)
         {
             if (finish[i] == false)
             {
@@ -507,6 +514,9 @@ bool safety(int *available, int *allocated, int *need)
 
     printf("State is safe, and request is satisfied:\n");
     printf("The SAFE sequence is: ");
+
+    printf("TEST >>> %d\n", safe_seq[4]);
+
     for (int i = 0; i < n_rows - 1; i++)
     {
         printf(" P%d ->", safe_seq[i]);

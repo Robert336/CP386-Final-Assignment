@@ -260,7 +260,7 @@ int request_resource(int args[]) // REMEMBER TO DEFINE ABOVE
             for (i = 0; i < n_col; i++)
             {
                 available_ptr[i] -= request[i];
-                *((allocation_ptr + customer_num * n_col) + i) += request[i]; // NOTE: USING N_ROWS
+                *((allocation_ptr + customer_num * n_col) + i) += request[i];
                 printf("\ntesterino >>>> \n");
                 printf("%d ", *((allocation_ptr + customer_num * n_col) + i));
                 printf("\n<<<< testerino over\n");
@@ -282,7 +282,7 @@ int request_resource(int args[]) // REMEMBER TO DEFINE ABOVE
                 for (i = 0; i < n_col; i++)
                 {
                     available_ptr[i] += request[i];
-                    *((allocation_ptr + customer_num * n_col) + i) -= request[i]; // NOTE: USING N_ROWS
+                    *((allocation_ptr + customer_num * n_col) + i) -= request[i];
                     *((need_ptr + customer_num * n_col) + i) += request[i];
                 }
                 return 0; // request not satisfied, oof
@@ -335,6 +335,8 @@ int release_resource(int args[]) // REMEMBER TO DEFINE ABOVE
                 available_ptr[i] += resources[i];
                 *((allocation_ptr + customer_num * n_col) + i) -= resources[i];
                 *((need_ptr + customer_num * n_col) + i) += resources[i]; //Resources get released and added back to available
+
+                //printf("\navailable[%d] = %d\n", i, available_ptr[i]);
             }
             return 1; // success
         }
@@ -351,6 +353,7 @@ int release_resource(int args[]) // REMEMBER TO DEFINE ABOVE
 void *thread_run()
 {
     char sequence[100];
+    int resources[n_col]; // the resources you are trying to release
     printf("Safe Sequence is: ");
     fgets(sequence, 100, stdin);
     printf("\n");
@@ -371,14 +374,29 @@ void *thread_run()
         j += 1;
         // printf("%d", args[j]);
     }
+
     // j += 1;
     // printf("%d\n", args[0]);
     for (int i = 0; i < j; i++)
     {
         printf("--> Customer/Thread %d\n", args[i]);
-        printf("\tAllocated resources: %d %d %d %d\n", allocation_ptr[i * n_col], allocation_ptr[i * n_col + 1], allocation_ptr[i * n_col + 2], allocation_ptr[i * n_col + 3]); //a tab is about the same spacing as the -->
-        printf("\tNeeded: %d %d %d %d\n", need_ptr[i * n_col], need_ptr[i * n_col + 1], need_ptr[i * n_col + 2], need_ptr[i * n_col + 3]);
-        printf("\tAvailable: %d %d %d %d\n", available_ptr[i], available_ptr[i + 1], available_ptr[i + 2], available_ptr[i + 3]); // Doesnt work proeprly
+        printf("\tAllocated resources: ");
+        for (int r = 0; r < n_col; r++)
+        {
+            printf("%d ", allocation_ptr[args[i] * n_col + r]); //1 1 0 0
+            resources[r] = allocation_ptr[args[i] * n_col + r];
+        }
+        printf("\n\tNeeded: ");
+        for (int r = 0; r < n_col; r++)
+        {
+            printf("%d ", need_ptr[args[i] * n_col + r]);
+        }
+        printf("\n\tAvailable: ");
+        for (int r = 0; r < n_col; r++)
+        {
+            printf("%d ", available_ptr[r]);
+        }
+        printf("\n");
 
         ///Create threads
         // pthread_t tid;
@@ -388,8 +406,38 @@ void *thread_run()
         // pthread_cancel(tid);
         printf("\tThread has finished\n");
         printf("\tThread is releasing resources\n");
-        release_resource(&allocation_ptr[i * n_col]); //idk?
-        printf("\tNew Available: %d %d %d %d\n", available_ptr[i * n_rows], available_ptr[i * n_rows + 1], available_ptr[i * n_rows + 2], available_ptr[i * n_rows + 3]);
+
+        // int resources[n_col]; // the resources you are trying to release
+
+        // for (int r = 0; r < n_col; r++)
+        // {
+        // int customer_num = args[i];
+        // printf("%d ", *(allocation_ptr + n_col * i + r));
+        // printf("%d", *((allocation_ptr + i * n_col) + r));
+
+        for (int w = 0; w < n_col; w++)
+        {
+            available_ptr[w] += resources[w];
+            *((allocation_ptr + args[i] * n_col) + w) -= resources[w];
+            *((need_ptr + args[i] * n_col) + w) += resources[w]; //Resources get released and added back to available
+
+            //printf("\navailable[%d] = %d\n", i, available_ptr[i]);
+        }
+        // }
+        printf("\n");
+
+        // release_resource((allocation_ptr + n_col * i)); //idk?
+        printf("%d", *((allocation_ptr + i * n_col) + i));
+
+        // release_resource(((allocation_ptr + i) + n_col) + i); //idk?
+
+        printf("\tNew Available: ");
+        for (int r = 0; r < n_col; r++)
+        {
+            printf("%d ", available_ptr[r]);
+        }
+        printf("\n");
+
         //Include pthread create here
         // pthread_kill(tid, &args[i]);
     }

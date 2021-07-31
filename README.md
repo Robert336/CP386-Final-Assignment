@@ -1,6 +1,6 @@
 <h1 align="center">Bankers Algorithm - CP386</h1>
 
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Robert336/CP386-Final-Assignment/blob/main/LICENSE)
+
 ## Description
 Creating the Bankers Algorithm. Banker's algo is used for resource allocation, as it incorperates deadlock avoidance through testing if the program is in a "safe" state before allocating the resources to customers. 
 
@@ -113,5 +113,6 @@ Testing manually with print statements
 
 ## License
 This project is licensed under the MIT License.
-[Read more](https://github.com/Robert336/CP386-Final-Assignment/blob/main/LICENSE)
+
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Robert336/CP386-Final-Assignment/blob/main/LICENSE)
 

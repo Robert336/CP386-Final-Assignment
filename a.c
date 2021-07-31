@@ -410,19 +410,19 @@ bool safety(int *available, int *allocated, int *need)
     printf("\n");
 
     // initalize finish - 0, ..., n-1 = false
-    bool finish[n_rows];
-    for (int i = 0; i < n_rows; i++)
+    bool finish[n_col];
+    for (int i = 0; i < n_col; i++)
     {
         finish[i] = false;
     }
 
-    int safe_seq[n_rows];
+    int safe_seq[n_col];
 
     int ind = 0;
-    while (ind < n_rows)
+    while (ind < n_col)
     {
         bool found = false;
-        for (int i = 0; i < n_rows; i++)
+        for (int i = 0; i < n_col; i++)
         {
             if (finish[i] == false)
             {

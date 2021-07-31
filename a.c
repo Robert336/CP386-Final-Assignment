@@ -24,7 +24,7 @@ void readFileSequences(char *fileName, int max[n_rows][n_col]);
 bool safety(int *available, int *allocated, int *need);
 int sum_arr(int arr[], int n);
 void get_n_col(char *filename);
-int bankersalgo();
+void bankersalgo();
 void run_cmd();
 int request_resource(int args[]);
 int release_resource(int args[]);
@@ -129,9 +129,10 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
     allocation_ptr = &allocation[0][0]; // m x n matrix representing the num of resources of each type currently allocated to each process
     need_ptr = &need[0][0];
 
-    printf("\nTESTING >>>>\n");
-    bool safe = safety(available, *allocation, *need);
-    printf("\n<<<<<<<<<<<<<\n");
+    // printf("\nTESTING >>>>\n");
+    bool safe;
+    safe = safety(available, *allocation, *need);
+    // printf("\n<<<<<<<<<<<<<\n");
 
     // Finish bankersalgo
 
@@ -215,7 +216,7 @@ void readFileSequences(char *fileName, int max[n_rows][n_col])
 }
 
 // impliments requestResource(), releaseResource(), and saftey() functions
-int bankersalgo() // REMEMBER TO DEFINE ABOVE
+void bankersalgo() // REMEMBER TO DEFINE ABOVE
 {
 }
 
@@ -400,11 +401,13 @@ void *thread_run()
 
         ///Create threads
         // pthread_t tid;
-        // pthread_create(&tid, NULL, thread_run, &args[i]); // Threading creates the sequence in random spots bug
-        // pthread_join(tid, NULL);
+
         printf("\tThread has started\n");
+        // pthread_create(&tid, NULL, thread_run, NULL); // Threading creates the sequence in random spots bug
+        // pthread_join(tid, NULL);
         // pthread_cancel(tid);
         printf("\tThread has finished\n");
+        // pthread_exit(&tid);
         printf("\tThread is releasing resources\n");
 
         // int resources[n_col]; // the resources you are trying to release
@@ -564,6 +567,7 @@ int sum_arr(int arr[], int n)
         }
         return sum;
     }
+    // return -1;
 }
 
 void get_n_col(char *filename)
@@ -679,7 +683,7 @@ void run_cmd()
         {
 
             //Execute the status command
-            printf("status\n");
+            // printf("status\n");
             status(available_ptr, max_ptr, allocation_ptr, need_ptr);
         }
         else if (strstr(command, "run") != NULL)

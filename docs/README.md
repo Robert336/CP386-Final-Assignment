@@ -47,7 +47,7 @@ In the terminal run `make`, then `make runq1` to execute the program
 
 First thing that appears when launching the program
 
-Sample requets command output (RQ)
+Sample requests command output (RQ)
 
 <img src="./rq.png">
 
@@ -96,7 +96,7 @@ Sample run command output (run)
 
 Can enter commands in either lower case or upper case
 
-#### Rquest Resource | RQ
+#### Request Resource | RQ
 
 Assigns resources to a specific customer from the available resources
 

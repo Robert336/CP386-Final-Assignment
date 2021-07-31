@@ -334,7 +334,7 @@ int release_resource(int args[]) // REMEMBER TO DEFINE ABOVE
             {
                 available_ptr[i] += resources[i];
                 *((allocation_ptr + customer_num * n_col) + i) -= resources[i];
-                *((need_ptr + customer_num * n_rows) + i) += resources[i]; //Resources get released and added back to available
+                *((need_ptr + customer_num * n_col) + i) += resources[i]; //Resources get released and added back to available
             }
             return 1; // success
         }

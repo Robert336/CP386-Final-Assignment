@@ -427,10 +427,10 @@ void *thread_run()
             //printf("\navailable[%d] = %d\n", i, available_ptr[i]);
         }
         // }
-        printf("\n");
+        // printf("\n");
 
         // release_resource((allocation_ptr + n_col * i)); //idk?
-        printf("%d", *((allocation_ptr + i * n_col) + i));
+        // printf("%d", *((allocation_ptr + i * n_col) + i));
 
         // release_resource(((allocation_ptr + i) + n_col) + i); //idk?
 
@@ -604,7 +604,7 @@ void get_n_col(char *filename)
 void run_cmd()
 {
     char command[100]; //Change command name to something else that matches bc its cmd and sequence
-    char cmd[2];
+    // char cmd[2];
     bool ongoing = true;
 
     /**
@@ -620,11 +620,11 @@ void run_cmd()
 
         fgets(command, 100, stdin);
 
-        char *onlyCommand = strtok(command, " "); //removes all white spaces and retrieves only the command
+        char *token = strtok(command, " "); //removes all white spaces and retrieves only the command
         //printf("COMMAND >>> %s\n", onlyCommand);
 
         int args[n_col + 1];
-        char *token;
+        // char *token;
         token = strtok(NULL, " ");
         int j = 0;
         while (token != NULL)
@@ -681,7 +681,8 @@ void run_cmd()
             /**
              * Include content for if the user wants to release resources
              * */
-            printf("work rl\n");
+
+            printf("The Safe Sequence has started, the algorithm will now verify your released resources (rl)...\n\n");
             release_resource(args);
         }
         else if (strstr(command, "status") != NULL)
@@ -701,13 +702,13 @@ void run_cmd()
         else if (strstr(command, "quit") != NULL)
         {
 
-            printf("Exit\n");
+            printf("Exiting...Bye have a nice day! :D\n");
             ongoing = false;
         }
         else
         {
             // if (k != "run" && k != "quit" && k != "status" && k != "rl" && k != "rq")
-            printf("Invalid Command. Retry and type the following {RQ, RL, Run, Status}\n");
+            printf("Invalid Command. Retry and type the following {RQ, RL, Run, Status, Quit} (Lower case for the commands also works)\n");
         }
     }
 }

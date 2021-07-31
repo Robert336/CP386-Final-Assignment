@@ -25,15 +25,25 @@ Then,
 ## Individual contribution
 *(author, co-author)*
 `int readFileCustomers(char *fileName);` - Jagveer
+
 `void readFileSequences(char *fileName, int max[n_rows][n_col]);` - Jagveer, Robert
+
 `bool safety(int *available, int *allocated, int *need);` - Robert, Jagveer
+
 `int sum_arr(int arr[], int n);` - Robert, Jagveer
+
 `void get_n_col(char *filename);` - Robert, Jagveer
+
 `int bankersalgo();` - Jagveer
+
 `void run_cmd();` - Jagveer, Robert
+
 `int request_resource(int args[]);` - Robert, Jagveer
+
 `int release_resource(int args[]);` - Robert, Jagveer
+
 `void status(int *available, int *max, int *allocation, int *need);` - Robert, Jagveer
+
 
 ## Features
 ## Tests

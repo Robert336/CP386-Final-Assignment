@@ -264,9 +264,21 @@ int request_resource(int args[]) // REMEMBER TO DEFINE ABOVE
                 printf("%d ", *((allocation_ptr + customer_num * n_rows) + i));
                 printf("\n<<<< testerino over\n");
                 *((need_ptr + customer_num * n_rows) + i) -= request[i];
+
+                ///Create threads here or other spot?
+                // pthread_t tid;
+                // pthread_create(&tid, NULL, thread_run, &customer_num);
+                // pthread_join(tid, NULL);
+                // ///All the threads join and can be called later
             }
             if (safety(available_ptr, allocation_ptr, need_ptr)) // might break, idk :)
             {
+                ///Create threads
+                pthread_t tid;
+                pthread_create(&tid, NULL, thread_run, &customer_num);
+                pthread_join(tid, NULL);
+                ///All the threads join and can be called later
+
                 return 1; // request satisfied, poggers
             }
             else // unsafe, undo changes pronto!
@@ -306,6 +318,43 @@ int release_resource(int resource[]) // REMEMBER TO DEFINE ABOVE
     return 0;
 }
 
+//Function to run the customer threads
+void *thread_run()
+{
+    char sequence[100];
+    printf("Safe Sequence is: ");
+    fgets(sequence, 100, stdin);
+
+    char *nums = strtok(sequence, " "); //removes all white spaces and retrieves only the nums
+    // printf("nums >>> %s\n", nums);
+
+    int args[5];
+    char *token;
+    token = strtok(NULL, " ");
+    int j = 0;
+    while (token != NULL)
+    {
+        // printf("\n");
+        // printf(" %d ", atoi(token));
+        args[j] = atoi(token);
+        // printf("%d ", args[j]);
+        token = strtok(NULL, " ");
+        j += 1;
+    }
+    for (int i = 0; i < j; i++)
+    {
+        printf("--> Customer/Thread %d", args[i]);
+        printf("\tAllocated resources: %d", ); //a tab is about the same spacing as the -->
+        printf("Needed: %d", );
+        printf("Available: %d", );
+        printf("Thread has started");
+        printf("Thread has finished");
+        printf("Thread is releasing resources");
+        printf("New Available: %d", );
+        pthread_kill();
+    }
+    return NULL;
+}
 // Saftey algo mentioned in chapter 8
 // Use: find whether or not a system is in a safe state.
 // Return: true - system is in a safe state
@@ -550,6 +599,7 @@ void run_cmd()
             //execute the run command
 
             printf("run\n");
+            thread_run();
         }
         else if (strstr(command, "quit") != NULL)
         {

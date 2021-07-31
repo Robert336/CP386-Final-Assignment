@@ -129,9 +129,9 @@ int main(int argc, char *argv[]) // modify to take commandline arguments
     allocation_ptr = &allocation[0][0]; // m x n matrix representing the num of resources of each type currently allocated to each process
     need_ptr = &need[0][0];
 
-    // printf("\nTESTING >>>>\n");
-    bool safe;
-    safe = safety(available, *allocation, *need);
+    // // printf("\nTESTING >>>>\n");
+    // bool safe;
+    // safe = safety(available, *allocation, *need);
     // printf("\n<<<<<<<<<<<<<\n");
 
     // Finish bankersalgo
@@ -262,9 +262,9 @@ int request_resource(int args[]) // REMEMBER TO DEFINE ABOVE
             {
                 available_ptr[i] -= request[i];
                 *((allocation_ptr + customer_num * n_col) + i) += request[i];
-                printf("\ntesterino >>>> \n");
-                printf("%d ", *((allocation_ptr + customer_num * n_col) + i));
-                printf("\n<<<< testerino over\n");
+                // printf("\ntesterino >>>> \n");
+                // printf("%d ", *((allocation_ptr + customer_num * n_col) + i));
+                // printf("\n<<<< testerino over\n");
                 *((need_ptr + customer_num * n_col) + i) -= request[i];
 
                 ///Create threads here or other spot?
@@ -456,7 +456,7 @@ bool safety(int *available, int *allocated, int *need)
     for (int i = 0; i < n_col; i++) // work = available
     {
         work[i] = *(available + i); // work[i] = available[i]
-        printf("work[%d] = %d ", i, *(available + i));
+        // printf("work[%d] = %d ", i, *(available + i));
     }
     printf("\n");
 
@@ -500,18 +500,19 @@ bool safety(int *available, int *allocated, int *need)
         }
         if (found == false)
         {
-            printf("System is not in safe state");
+            printf("System is not in safe state\n");
             return false;
         }
     }
 
+    printf("State is safe, and request is satisfied:\n");
     printf("The SAFE sequence is: ");
     for (int i = 0; i < n_rows - 1; i++)
     {
         printf(" P%d ->", safe_seq[i]);
     }
     printf(" P%d\n", safe_seq[n_rows - 1]);
-
+    printf("\n");
     //free(work);
     //free(finish);
     return true;
@@ -666,9 +667,13 @@ void run_cmd()
             /**
              * Include content for if the user requests resources
              * */
-            printf("work rq\n");
+            printf("\nThe Safe Sequence has started, the algorithm will now verify your requested resources (rq)...\n");
 
-            request_resource(args);
+            // request_resource(args);
+            if (request_resource(args) == false)
+            {
+                printf("\nSystem is not in safe state\n\n");
+            }
         }
         else if (strstr(command, "rl") != NULL)
         {

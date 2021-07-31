@@ -106,6 +106,9 @@ Testing manually with print statements
 - [Robert Mazza](https://github.com/Robert336)
 - [Jagveer Sangha](https://github.com/Jagveer-Sangha)
 ## Credits
+[GeeksforGeeks](https://www.geeksforgeeks.org/bankers-algorithm-in-operating-system-2/)
+[StudyTonight](https://www.studytonight.com/operating-system/bankers-algorithm)
+
 ## License
 This project is licensed under the MIT License.
 [Read more](https://github.com/Robert336/CP386-Final-Assignment/blob/main/LICENSE)

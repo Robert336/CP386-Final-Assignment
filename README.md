@@ -9,7 +9,6 @@ the honest answer: needs to be completed for marks :)
 ## Screenshots
 
 ## Individual contribution
-[![wakatime](https://wakatime.com/badge/github/Robert336/CP386-Final-Assignment.svg)](https://wakatime.com/badge/github/Robert336/CP386-Final-Assignment)
 
 ## Features
 ## Tests

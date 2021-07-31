@@ -24,6 +24,7 @@ Then,
 
 ## Individual contribution
 *(author, co-author)*
+
 `int readFileCustomers(char *fileName);` - Jagveer
 
 `void readFileSequences(char *fileName, int max[n_rows][n_col]);` - Jagveer, Robert

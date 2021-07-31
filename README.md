@@ -60,6 +60,9 @@ Then,
 
 ## Features
 ### Commands
+
+Can enter commands in either lower case or upper case
+
 #### Rquest Resource | RQ
 
 Assigns resources to a specific customer from the available resources

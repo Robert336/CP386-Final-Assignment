@@ -38,16 +38,13 @@ Sample requets command output (RQ)
 <img src="./rq.png">
 
 Sample release command output (RL)
-<img src="https://imgur.com/a/GRzlFI8">
+<img src="./release.png">
 
 Sample status command output (status)
-<img src="https://imgur.com/a/fl1qe8c">
+<img src="./status.png">
 
 Sample run command output (run)
-<img src="https://imgur.com/a/fREgL9x">
-
-
-
+<img src="./run.png">
 
 ## Individual contribution
 *(author, co-author)*
@@ -122,7 +119,7 @@ Enter Command: exit
 ## Tests
 Manual test cases.
 <details>
-![alt text](https://imgur.com/a/TGujBYH)
+ <img src="./test 1.png">
 </details>
 
 ## Code Example
